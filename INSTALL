@@ -1,0 +1,22 @@
+wget http://1978th.net/tokyocabinet/tokyocabinet-1.4.41.tar.gz
+tar xvzf tokyocabinet-1.4.41.tar.gz
+cd tokyocabinet-1.4.41
+./configure; make
+sudo make install
+cd ..
+ 
+wget http://1978th.net/tokyodystopia/tokyodystopia-0.9.13.tar.gz
+tar xvzf tokyodystopia-0.9.13.tar.gz
+cd tokyodystopia-0.9.13
+./configure; make
+sudo make install
+cd ..
+ 
+wget http://github.com/masuidrive/php-tokyo-dystopia/tarball/master
+tar xvfz masuidrive-php-tokyo-dystopia-*.tar.gz
+cd masuidrive-php-tokyo-dystopia-*
+phpize
+./configure --with-tokyo-dystopia-dir=/usr/local
+make
+sudo make install
+sudo sh -c 'echo "extension=tokyo_dystopia.so" >> /usr/local/php5/lib/php.ini'
