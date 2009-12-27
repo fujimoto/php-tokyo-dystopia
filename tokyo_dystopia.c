@@ -69,7 +69,7 @@ static function_entry tokyo_dystopia_functions[] = {
 	PHP_FE(tokyo_dystopia_qgram_vanish, NULL)
 	PHP_FE(tokyo_dystopia_qgram_copy, NULL)
 	PHP_FE(tokyo_dystopia_qgram_path, NULL)
-	PHP_FE(tokyo_dystopia_qgram_rnum, NULL)
+	PHP_FE(tokyo_dystopia_qgram_tnum, NULL)
 	PHP_FE(tokyo_dystopia_qgram_fsiz, NULL)
 	PHP_FE(tokyo_dystopia_qgram_ecode, NULL)
 	PHP_FE(tokyo_dystopia_qgram_errmsg, NULL)
@@ -108,7 +108,7 @@ static function_entry tokyo_dystopia_functions[] = {
 	PHP_FE(tokyo_dystopia_word_vanish, NULL)
 	PHP_FE(tokyo_dystopia_word_copy, NULL)
 	PHP_FE(tokyo_dystopia_word_path, NULL)
-	PHP_FE(tokyo_dystopia_word_rnum, NULL)
+	PHP_FE(tokyo_dystopia_word_tnum, NULL)
 	PHP_FE(tokyo_dystopia_word_fsiz, NULL)
 	PHP_FE(tokyo_dystopia_word_ecode, NULL)
 	PHP_FE(tokyo_dystopia_word_errmsg, NULL)
@@ -159,7 +159,7 @@ static zend_function_entry tokyo_dystopia_qgram_functions[] = {
 	PHP_FALIAS(vanish,					tokyo_dystopia_qgram_vanish,			NULL)
 	PHP_FALIAS(copy,					tokyo_dystopia_qgram_copy,			NULL)
 	PHP_FALIAS(path,					tokyo_dystopia_qgram_path,			NULL)
-	PHP_FALIAS(rnum,					tokyo_dystopia_qgram_rnum,			NULL)
+	PHP_FALIAS(rnum,					tokyo_dystopia_qgram_tnum,			NULL)
 	PHP_FALIAS(fsiz,					tokyo_dystopia_qgram_fsiz,			NULL)
 	PHP_FALIAS(ecode,					tokyo_dystopia_qgram_ecode,			NULL)
 	PHP_FALIAS(errmsg,					tokyo_dystopia_qgram_errmsg,			NULL)
@@ -210,7 +210,7 @@ static zend_function_entry tokyo_dystopia_word_functions[] = {
 	PHP_FALIAS(vanish,					tokyo_dystopia_word_vanish,			NULL)
 	PHP_FALIAS(copy,					tokyo_dystopia_word_copy,			NULL)
 	PHP_FALIAS(path,					tokyo_dystopia_word_path,			NULL)
-	PHP_FALIAS(rnum,					tokyo_dystopia_word_rnum,			NULL)
+	PHP_FALIAS(rnum,					tokyo_dystopia_word_tnum,			NULL)
 	PHP_FALIAS(fsiz,					tokyo_dystopia_word_fsiz,			NULL)
 	PHP_FALIAS(ecode,					tokyo_dystopia_word_ecode,			NULL)
 	PHP_FALIAS(errmsg,					tokyo_dystopia_word_errmsg,			NULL)
@@ -623,10 +623,10 @@ PHP_FUNCTION(tokyo_dystopia_core_tune) {
 		RETURN_FALSE;
 	}
 
-	int ernum;
-	int etnum;
-	int iusiz;
-	int flag;
+	long ernum;
+	long etnum;
+	long iusiz;
+	long flag;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llll", &ernum, &etnum, &iusiz, &flag) == FAILURE) {
 		return;
 	}
@@ -651,8 +651,8 @@ PHP_FUNCTION(tokyo_dystopia_core_setcache) {
 		RETURN_FALSE;
 	}
 
-	int icsiz;
-	int lcnum;
+	long icsiz;
+	long lcnum;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll", &icsiz, &lcnum) == FAILURE) {
 		return;
 	}
@@ -677,7 +677,7 @@ PHP_FUNCTION(tokyo_dystopia_core_setfwmmax) {
 		RETURN_FALSE;
 	}
 
-	int fwmmax;
+	long fwmmax;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll", &fwmmax) == FAILURE) {
 		return;
 	}
@@ -877,7 +877,7 @@ PHP_FUNCTION(tokyo_dystopia_core_get) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &id) == FAILURE) {
 		return;
 	}
@@ -904,7 +904,7 @@ PHP_FUNCTION(tokyo_dystopia_core_put) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	char *data;
 	int data_len;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls", &id, &data, &data_len) == FAILURE) {
@@ -936,7 +936,7 @@ PHP_FUNCTION(tokyo_dystopia_core_out) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &id) == FAILURE) {
 		return;
 	}
@@ -1042,7 +1042,7 @@ PHP_FUNCTION(tokyo_dystopia_qgram_open) {
 
 	char *path;
 	int path_len;
-	int flag;
+	long flag;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sl", &path, &path_len, &flag) == FAILURE) {
 		return;
 	}
@@ -1087,8 +1087,8 @@ PHP_FUNCTION(tokyo_dystopia_qgram_tune) {
 		RETURN_FALSE;
 	}
 
-	int etnum;
-	int flag;
+	long etnum;
+	long flag;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll", &etnum, &flag) == FAILURE) {
 		return;
 	}
@@ -1113,8 +1113,8 @@ PHP_FUNCTION(tokyo_dystopia_qgram_setcache) {
 		RETURN_FALSE;
 	}
 
-	int icsiz;
-	int lcnum;
+	long icsiz;
+	long lcnum;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll", &icsiz, &lcnum) == FAILURE) {
 		return;
 	}
@@ -1139,7 +1139,7 @@ PHP_FUNCTION(tokyo_dystopia_qgram_setfwmmax) {
 		RETURN_FALSE;
 	}
 
-	int fwmmax;
+	long fwmmax;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ll", &fwmmax) == FAILURE) {
 		return;
 	}
@@ -1264,8 +1264,8 @@ PHP_FUNCTION(tokyo_dystopia_qgram_path) {
 }
 /* }}} */
 
-/* {{{ proto tokyo_dystopia_qgram_rnum */
-PHP_FUNCTION(tokyo_dystopia_qgram_rnum) {
+/* {{{ proto tokyo_dystopia_qgram_tnum */
+PHP_FUNCTION(tokyo_dystopia_qgram_tnum) {
 	zval *obj = TOKYO_DYSTOPIA_GET_THIS(tokyo_dystopia_qgram_entry_ptr);
 	if (obj == NULL) {
 		RETURN_FALSE;
@@ -1276,7 +1276,7 @@ PHP_FUNCTION(tokyo_dystopia_qgram_rnum) {
 		RETURN_FALSE;
 	}
 
-	RETURN_LONG(tcqdbrnum(db));
+	RETURN_LONG(tcqdbtnum(db));
 }
 /* }}} */
 
@@ -1303,7 +1303,7 @@ PHP_FUNCTION(tokyo_dystopia_qgram_put) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	char *data;
 	int data_len;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls", &id, &data, &data_len) == FAILURE) {
@@ -1335,7 +1335,7 @@ PHP_FUNCTION(tokyo_dystopia_qgram_out) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	char *data;
 	int data_len;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ls", &id, &data, &data_len) == FAILURE) {
@@ -1364,7 +1364,7 @@ PHP_FUNCTION(tokyo_dystopia_qgram_search) {
 
 	char *q;
 	int q_len;
-	int mode;
+	long mode;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sl", &q, &q_len, &mode) == FAILURE) {
 		return;
 	}
@@ -1444,7 +1444,7 @@ PHP_FUNCTION(tokyo_dystopia_simple_open) {
 
 	char *path;
 	int path_len;
-	int flag;
+	long flag;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sl", &path, &path_len, &flag) == FAILURE) {
 		return;
 	}
@@ -1489,10 +1489,10 @@ PHP_FUNCTION(tokyo_dystopia_simple_tune) {
 		RETURN_FALSE;
 	}
 
-	int ernum;
-	int etnum;
-	int iusiz;
-	int flag;
+	long ernum;
+	long etnum;
+	long iusiz;
+	long flag;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "llll", &ernum, &etnum, &iusiz, &flag) == FAILURE) {
 		return;
 	}
@@ -1743,7 +1743,7 @@ PHP_FUNCTION(tokyo_dystopia_simple_get) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &id) == FAILURE) {
 		return;
 	}
@@ -1778,7 +1778,7 @@ PHP_FUNCTION(tokyo_dystopia_simple_put) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	zval *array;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "la", &id, &array) == FAILURE) {
 		return;
@@ -1820,7 +1820,7 @@ PHP_FUNCTION(tokyo_dystopia_simple_out) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &id) == FAILURE) {
 		return;
 	}
@@ -2148,8 +2148,8 @@ PHP_FUNCTION(tokyo_dystopia_word_path) {
 }
 /* }}} */
 
-/* {{{ proto tokyo_dystopia_word_rnum */
-PHP_FUNCTION(tokyo_dystopia_word_rnum) {
+/* {{{ proto tokyo_dystopia_word_tnum */
+PHP_FUNCTION(tokyo_dystopia_word_tnum) {
 	zval *obj = TOKYO_DYSTOPIA_GET_THIS(tokyo_dystopia_word_entry_ptr);
 	if (obj == NULL) {
 		RETURN_FALSE;
@@ -2160,7 +2160,7 @@ PHP_FUNCTION(tokyo_dystopia_word_rnum) {
 		RETURN_FALSE;
 	}
 
-	RETURN_LONG(tcwdbrnum(db));
+	RETURN_LONG(tcwdbtnum(db));
 }
 /* }}} */
 
@@ -2187,7 +2187,7 @@ PHP_FUNCTION(tokyo_dystopia_word_put) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	zval *array;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "la", &id, &array) == FAILURE) {
 		return;
@@ -2229,7 +2229,7 @@ PHP_FUNCTION(tokyo_dystopia_word_out) {
 		RETURN_FALSE;
 	}
 
-	int id;
+	long id;
 	zval *array;
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "la", &id) == FAILURE) {
 		return;
